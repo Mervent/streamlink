@@ -36,9 +36,11 @@ class DASHStreamWriter(SegmentedStreamWriter):
                 time_to_wait = (segment.available_at - now).total_seconds()
                 fname = os.path.basename(urlparse(segment.url).path)
                 log.debug("Waiting for segment: {fname} ({wait:.01f}s)".format(fname=fname, wait=time_to_wait))
+                log.debug("Fetch - segment.available_at: {available_at}".format(available_at=segment.available_at))
                 sleep_until(segment.available_at)
 
             if segment.range:
+                log.debug("Fetch - segment.range: {range}".format(range=segment.range))
                 start, length = segment.range
                 if length:
                     end = start + length - 1
@@ -46,6 +48,7 @@ class DASHStreamWriter(SegmentedStreamWriter):
                     end = ""
                 headers["Range"] = "bytes={0}-{1}".format(start, end)
 
+            log.debug("Fetch - calling http.get")
             return self.session.http.get(segment.url,
                                          timeout=self.timeout,
                                          exception=StreamError,

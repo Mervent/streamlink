@@ -71,10 +71,26 @@ def sleeper(duration):
 
 
 def sleep_until(walltime):
+    log.debug("Sleep function - walltime: {walltime}".format(walltime=walltime))
     c = datetime.datetime.now(tz=utc)
     time_to_wait = (walltime - c).total_seconds()
+    log.debug(
+        "Sleep function - calculate time_to_wait: {time_to_wait}. Time: {now}.".format(
+            time_to_wait=time_to_wait, now=c
+        )
+    )
     if time_to_wait > 0:
+        log.debug(
+            "Sleep function - call time sleep: {time_to_wait}. Time: {c}.".format(
+                time_to_wait=time_to_wait, now=c
+            )
+        )
         time.sleep(time_to_wait)
+        log.debug(
+            "Sleep function - out of sleep: {time_to_wait}. Time: {c}.".format(
+                time_to_wait=time_to_wait, now=c
+            )
+        )
 
 
 class MPDParsers(object):
