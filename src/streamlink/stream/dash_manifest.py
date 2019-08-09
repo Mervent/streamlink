@@ -81,13 +81,13 @@ def sleep_until(walltime):
     )
     if time_to_wait > 0:
         log.debug(
-            "Sleep function - call time sleep: {time_to_wait}. Time: {c}.".format(
+            "Sleep function - call time sleep: {time_to_wait}. Time: {now}.".format(
                 time_to_wait=time_to_wait, now=c
             )
         )
         time.sleep(time_to_wait)
         log.debug(
-            "Sleep function - out of sleep: {time_to_wait}. Time: {c}.".format(
+            "Sleep function - out of sleep: {time_to_wait}. Time: {now}.".format(
                 time_to_wait=time_to_wait, now=c
             )
         )
